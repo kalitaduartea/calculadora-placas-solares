@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Placas Solares</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Calculadora de Placas Solares</h1>
+  <label for="consumo">Informe o consumo médio em kWh:  </label>
+  <input type="char" id="consumo" name="consumo">
+  <br><br>
+  <label for="instalacao">Informe o tipo da instalação:</label>
+  <select name="instalacao" id="instalacao">
+    <option value="monofasica">Monofásica</option>
+    <option value="bifasica">Bifásica</option>
+    <option value="trifasica">Trifásica</option>
+  </select>
+  <br><br>
+  <button onclick="calcular()">Calcular</button>
+  <p id="resultado"></p>
+  <script src="scripts.js"></script>
+
+</body>
+</html>
