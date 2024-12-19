@@ -8,15 +8,18 @@
 </head>
 <body>
   <h1>Calculadora de Placas Solares</h1>
-  <label for="consumo">Informe o consumo médio em kWh:  </label>
-  <input type="char" id="consumo" name="consumo">
+  <label for="consumo">Informe o consumo médio em kWh/mês </label>
+  <input type="text" id="consumo" name="consumo" oninput="formatarNumero(this)">
   <br><br>
-  <label for="instalacao">Informe o tipo da instalação:</label>
+  <label for="instalacao">Informe o tipo da instalação </label>
   <select name="instalacao" id="instalacao">
     <option value="monofasica">Monofásica</option>
     <option value="bifasica">Bifásica</option>
     <option value="trifasica">Trifásica</option>
   </select>
+  <br><br>
+  <label for="custoEnergia">Informe o valor do custo da energia elétrica em R$/kWh </label>
+  <input type="text" id="custoEnergia" name="custoEnergia" oninput="formatarNumero(this)" >
   <br><br>
   <button onclick="calcular()">Calcular</button>
   <p id="resultado"></p>
