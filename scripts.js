@@ -1,8 +1,8 @@
-function formatarNumero (input) {
+function formatarNumero(input) {
     // Remove caracteres diferentes de número ou ponto
     let value = input.value.replace(/[^0-9.]/g, '');
 
-    // Limitar a entrada a um ponto decimal apenas
+    // Limita a entrada a um ponto decimal apenas
     let parts = value.split('.');
     if (parts.length > 2) {
         value = parts[0] + '.' + parts.slice(1).join('');
@@ -17,8 +17,13 @@ function formatarNumero (input) {
     input.value = value;
 }
 
-function calcularQuantidadePlacas (consumo, instalacao) {
-    const geracaoPlaca = 72; // em condições normais, gera 72kWh/mês
+function calcularGeracaoIndividualPlaca(potenciaPlaca, irradiacaoSolar) {
+    const eficiencia = document.getElementById('eficienciaSistema').value; // Eficiência do sistema
+    return eficiencia * (365 / 12) * (potenciaPlaca / 1000) * irradiacaoSolar;
+}
+
+function calcularQuantidadePlacas(consumo, instalacao, potenciaPlaca, irradiacaoSolar) {
+    const geracaoPlaca = calcularGeracaoIndividualPlaca(potenciaPlaca, irradiacaoSolar);
     let consumoMinimo;
 
     // Consumo mínimo referente ao tipo da instalação
@@ -42,22 +47,22 @@ function calcularQuantidadePlacas (consumo, instalacao) {
 
     const economia = consumoCompensavel * custoEnergia;
 
-    return { numeroPlacas, economia };
+    const geracaoMensal = numeroPlacas * geracaoPlaca;
+
+    return { numeroPlacas, economia, geracaoMensal };
 }
 
-function calcular () {
-    const consumoMedio = document.getElementById('consumo').value;
+function calcular() {
+    const consumoMedio = parseFloat(document.getElementById('consumo').value);
     const tipoInstalacao = document.getElementById('instalacao').value;
+    const potenciaPlaca = parseFloat(document.getElementById('potenciaPlaca').value);
+    const irradiacaoSolar = parseFloat(document.getElementById('irradiacaoSolar').value);
 
-
-    const resultado = calcularQuantidadePlacas(consumoMedio, tipoInstalacao);
+    const resultado = calcularQuantidadePlacas(consumoMedio, tipoInstalacao, potenciaPlaca, irradiacaoSolar);
 
     if (resultado.error) {
         document.getElementById('resultado').innerText = resultado.error;
     } else {
-
-        document.getElementById('resultado').innerText = `Quantidade de placas necessárias: ${resultado.numeroPlacas}\nEconomia prevista: R$ ${resultado.economia.toFixed(2)}`;
-
+        document.getElementById('resultado').innerText = `Quantidade de placas: ${resultado.numeroPlacas}\nGeração mensal: ${resultado.geracaoMensal.toFixed(2)} kWh/mês\n Economia prevista: R$ ${resultado.economia.toFixed(2)}`;
     }
-
 }

@@ -21,9 +21,17 @@
   <label for="custoEnergia">Informe o valor do custo da energia elétrica em R$/kWh </label>
   <input type="text" id="custoEnergia" name="custoEnergia" oninput="formatarNumero(this)" >
   <br><br>
+  <label for="potenciaPlaca">Informe a potência da placa em W </label>
+  <input type="text" id="potenciaPlaca" name="potenciaPlaca" oninput="formatarNumero(this)">
+  <br><br>
+  <label for="irradiacaoSolar">Informe a irradiação solar média em kWh/m²/dia </label>
+  <input type="text" id="irradiacaoSolar" name="irradiacaoSolar" oninput="formatarNumero(this)">
+  <br><br>
+  <label for="eficienciaSistema">Informe a eficiência do sistema em % </label>
+  <input type="text" id="eficienciaSistema" name="eficienciaSistema" oninput="formatarNumero(this)">
+  <br><br>
   <button onclick="calcular()">Calcular</button>
   <p id="resultado"></p>
   <script src="scripts.js"></script>
-
 </body>
 </html>
